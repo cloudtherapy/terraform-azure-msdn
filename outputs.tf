@@ -5,15 +5,15 @@ output "resource_group_name" {
 
 output "virtual_network_name" {
   description = "The name of the created virtual network."
-  value       = azurerm_virtual_network.misfirm_network.name
+  value       = azurerm_virtual_network.msdn_network.name
 }
 
 output "subnet_name_1" {
   description = "The name of the created subnet 1."
-  value       = azurerm_subnet.misfirm_subnet_1.name
+  value       = azurerm_subnet.msdn_subnet_1.name
 }
 
 output "subnet_name_2" {
   description = "The name of the created subnet 2."
-  value       = azurerm_subnet.misfirm_subnet_2.name
+  value       = azurerm_subnet.msdn_subnet_2.name
 }
