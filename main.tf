@@ -35,3 +35,20 @@ resource "azurerm_subnet" "msdn_subnet_2" {
   virtual_network_name = azurerm_virtual_network.msdn_network.name
   address_prefixes     = ["10.65.17.0/24"]
 }
+
+data "azurerm_virtual_network" "misfirm_network" {
+  name                = "vnet-shared-10-65-0"
+  resource_group_name = "rg-shared-services"
+  provider            = azurerm.misfirm
+}
+
+resource "azurerm_virtual_network_peering" "peer-to-misfirm" {
+  name                         = "peer_10_65_16_to_10_65_0"
+  resource_group_name          = azurerm_resource_group.rg.name
+  virtual_network_name         = azurerm_virtual_network.msdn_network.name
+  remote_virtual_network_id    = data.azurerm_virtual_network.misfirm_network.id
+  allow_virtual_network_access = true
+  allow_forwarded_traffic      = true
+  allow_gateway_transit        = true
+  use_remote_gateways          = true
+}
